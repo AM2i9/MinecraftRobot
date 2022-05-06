@@ -1,0 +1,19 @@
+{
+    "fileName": "minecraft-rcon.json",
+    "name": "minecraft-rcon",
+    "version": "0.0.16",
+    "uuid": "",
+    "mavenUrls": [
+        "https://jitpack.io"
+    ],
+    "jsonUrl": "",
+    "javaDependencies": [
+        {
+            "groupId": "com.github.MrGraversen",
+            "artifactId": "minecraft-rcon",
+            "version": "0.0.16"
+        }
+    ],
+    "jniDependencies": [],
+    "cppDependencies": []
+}
