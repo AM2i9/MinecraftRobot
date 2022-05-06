@@ -22,12 +22,16 @@ public class Robot extends TimedRobot {
   );
   private MinecraftRcon rcon;
 
+  private boolean[] leverStates = new boolean[4];
+
   private PWMTalonSRX frontLeft;
   private PWMTalonSRX frontRight;
   private PWMTalonSRX backLeft;
   private PWMTalonSRX backRight;
 
   private MecanumDrive drive;
+
+  private final double kSpeed = 1;
 
   @Override
   public void robotInit() {
@@ -36,6 +40,9 @@ public class Robot extends TimedRobot {
     frontRight = new PWMTalonSRX(2);
     backLeft = new PWMTalonSRX(1);
     backRight = new PWMTalonSRX(3);
+
+    frontRight.setInverted(true);
+    backRight.setInverted(true);
 
     drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
@@ -50,8 +57,16 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    String resp = rcon.sendSync(new GetLeverStateCommand(0)).getResponseString();
-    System.out.println("Lever state " + resp.substring(10, 11));
+    for (int i = 0; i < leverStates.length; i++) {
+      leverStates[i] = rcon.sendSync(
+        new GetLeverStateCommand(i)
+      ).getResponseString().substring(10,11).equals("1");
+    }
+
+    double xSpeed = kSpeed * ((leverStates[1] ? -1 : 0) + (leverStates[2] ? 1 : 0));
+    double ySpeed = kSpeed * ((leverStates[0] ? 1 : 0) + (leverStates[3] ? -1 : 0));
+
+    drive.driveCartesian(ySpeed, xSpeed, 0);
   }
 
   @Override
