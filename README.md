@@ -18,9 +18,7 @@ The robot uses four PWN TalonSRXs, with the following connections
 
 Flash the RoboRIO to the latest image version.
 
-The Minecraft server jar is not included in the repository, so it must be downloaded from [here](https://www.minecraft.net/en-us/article/minecraft-java-edition-1132).
-
-After downloading it, make sure it is named `server.jar`, and place it in the `deploy` directory. Then, deploy the code to the robot.
+Go to the `src/main/deploy` directory. Run the `download.ps1` script in that directory, which should download Java and the Minecraft server jar. Make sure that the downloaded items are in the `deploy` directory.
 
 Once the code has deployed, the robot code may crash. This is fine, because the server isn't running yet. We can't run the server from the robot code (*yet*), so it is necessary to SSH into the RIO, navigate to the deploy folder, and run the `start.sh` script to start the server.
 
