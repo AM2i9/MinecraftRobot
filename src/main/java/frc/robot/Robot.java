@@ -17,7 +17,7 @@ import io.graversen.minecraft.rcon.service.RconDetails;
 public class Robot extends TimedRobot {
 
   private final MinecraftRconService rconService = new MinecraftRconService(
-    RconDetails.localhost("PASSWORD"),
+    new RconDetails("localhost", 25575, "PASSWORD"),
     ConnectOptions.defaults()
   );
   private MinecraftRcon rcon;
@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
 
   private MecanumDrive drive;
 
-  private final double kSpeed = 1;
+  private final double kSpeed = 0.5;
 
   @Override
   public void robotInit() {

@@ -1,1 +1,0 @@
-/home/lvuser/deploy/jdk-18.0.1.1/bin/java.exe -jar server.jar nogi
